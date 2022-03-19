@@ -2,7 +2,6 @@ import h5py
 import struct
 import time
 
-
 # 申报单
 class SimpleOrder:
     def __init__(self, x, y, z, order_id, type, price, volume):
@@ -53,7 +52,7 @@ def save(pkg):
             # {'stk_code': 1, 'bid_id': 109, 'ask_id': 118, 'price': 1016.79, 'volume': 146}
             trade = Trade(stk_code=data['stk_code'], bid_id=data['bid_id'], ask_id=data['ask_id'],
                           price=data['price'], volume=data['volume'])
-            print("trade:",data)
+            print("trade:", data)
             if trade.stk_code == 1:
                 trade1.append(trade)
             elif trade.stk_code == 2:
@@ -93,12 +92,11 @@ if __name__ == '__main__':
     # price_path = "/data/team-19/100x100x100/price1.h5"
     # volume_path = "/data/team-19/100x100x100/volume1.h5"
     # type_path = "/data/team-19/100x100x100/type1.h5"
-    order_id_path = "./100x100x100/order_id2.h5"
-    direction_path = "./100x100x100/direction2.h5"
-    price_path = "./100x100x100/price2.h5"
-    volume_path = "./100x100x100/volume2.h5"
-    type_path = "./100x100x100/type2.h5"
-
+    order_id_path = "./data/100x100x100/order_id2.h5"
+    direction_path = "./data/100x100x100/direction2.h5"
+    price_path = "./data/100x100x100/price2.h5"
+    volume_path = "./data/100x100x100/volume2.h5"
+    type_path = "./data/100x100x100/type2.h5"
 
     print("===============data in start============")
     start = time.time()
@@ -135,7 +133,8 @@ if __name__ == '__main__':
         for j in range(y_len):
             for k in range(z_len):
 
-                order = SimpleOrder(i, j, k, order_id_mtx[i, j, k], type_mtx[i, j, k], price_mtx[i, j, k],
+                order = SimpleOrder(i, j, k, order_id_mtx[i, j, k],
+                                    type_mtx[i, j, k], price_mtx[i, j, k],
                                     volume_mtx[i, j, k])
                 if order.stk_code == 1:
                     queue1.append(order)
