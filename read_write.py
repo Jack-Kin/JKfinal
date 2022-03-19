@@ -88,16 +88,17 @@ trade9 = []
 trade10 = []
 
 if __name__ == '__main__':
-    order_id_path = "/data/team-19/100x10x10/order_id1.h5"
-    direction_path = "/data/team-19/100x10x10/direction1.h5"
-    price_path = "/data/team-19/100x10x10/price1.h5"
-    volume_path = "/data/team-19/100x10x10/volume1.h5"
-    type_path = "/data/team-19/100x10x10/type1.h5"
-    # order_id_path = "C:/Users/chenwei/Documents/NetSarang Computer/7/Xshell/Sessions/order_id2.h5"
-    # direction_path = "C:/Users/chenwei/Documents/NetSarang Computer/7/Xshell/Sessions/direction2.h5"
-    # price_path = "C:/Users/chenwei/Documents/NetSarang Computer/7/Xshell/Sessions/price2.h5"
-    # volume_path = "C:/Users/chenwei/Documents/NetSarang Computer/7/Xshell/Sessions/volume2.h5"
-    # type_path = "C:/Users/chenwei/Documents/NetSarang Computer/7/Xshell/Sessions/type2.h5"
+    # order_id_path = "/data/team-19/100x100x100/order_id1.h5"
+    # direction_path = "/data/team-19/100x100x100/direction1.h5"
+    # price_path = "/data/team-19/100x100x100/price1.h5"
+    # volume_path = "/data/team-19/100x100x100/volume1.h5"
+    # type_path = "/data/team-19/100x100x100/type1.h5"
+    order_id_path = "./100x100x100/order_id2.h5"
+    direction_path = "./100x100x100/direction2.h5"
+    price_path = "./100x100x100/price2.h5"
+    volume_path = "./100x100x100/volume2.h5"
+    type_path = "./100x100x100/type2.h5"
+
 
     print("===============data in start============")
     start = time.time()
