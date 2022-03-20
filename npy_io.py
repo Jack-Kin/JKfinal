@@ -163,9 +163,9 @@ def parallel_read_array(filename, axis=0, comm=None):
 
     local_shape = list(global_shape)
     axis_len = local_shape[axis]
-    base = axis_len / comm.size
+    base = int(axis_len / comm.size)
     rem = axis_len % comm.size
-    part = base * np.ones(comm.size, dtype=np.int) + (np.arange(comm.size) < rem).astype(np.int)
+    part = base * np.ones(comm.size, dtype=np.int64) + (np.arange(comm.size) < rem).astype(int)
     bound = np.cumsum(np.insert(part, 0, 0))
     local_shape[axis] = part[comm.rank] # shape of local array
     local_start = [0] * len(global_shape)
@@ -197,16 +197,17 @@ def parallel_read_array(filename, axis=0, comm=None):
     return local_array
 
 
-# filename = 'test.npy'
-# local_array = np.arange(12, dtype='i').reshape(3, 4)
-#
-# # parallelly write local array to file, assume array is distributed on axis 1, i.e., column
-# parallel_write_array(filename, local_array, axis=1, comm=comm)
-#
-# # check data in the file
-# if rank == 0:
-#     print('data in file: %s' % np.load(filename))
-#
-# # now parallelly read data from file, each process read several row of the array
-# print('process %d read: %s' % (rank, parallel_read_array(filename, axis=0, comm=comm)))
-#
+filename = 'test.npy'
+local_array = np.arange(100, dtype=np.int64).reshape((10, 1, 10))
+
+# parallel write local array to file, assume array is distributed on axis 1, i.e., column
+parallel_write_array(filename, local_array, axis=1, comm=comm)
+
+# check data in the file
+if rank == 0:
+    print('data in file: %s' % np.load(filename))
+
+# now parallel read data from file, each process read several row of the array
+queue = parallel_read_array(filename, axis=0, comm=comm)
+print('process %d read: %s' % (rank, queue))
+

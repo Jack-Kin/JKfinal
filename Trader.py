@@ -5,8 +5,14 @@ import logging
 import socket
 
 import logging
+now = int(round(time.time()*1000))
 
-logging.basicConfig(filename='trade.log', level=logging.DEBUG)
+now_str = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(now / 1000))
+
+now_str = now_str.replace(" ", "-").replace(':','')
+log_file_name= './log/trade1-' + now_str + '.log'
+logging.basicConfig(filename=log_file_name, level=logging.DEBUG)
+
 f1 = open("./data/chen/trade1", "ab")
 f2 = open("./data/chen/trade2", "ab")
 f3 = open("./data/chen/trade3", "ab")
@@ -190,9 +196,9 @@ if __name__ == '__main__':
     logging.debug("===============data sort and filter completed============" + str(end - start))
     print("===============data sort and filter completed============" + str(end - start))
 
-    server_address = 'localhost'
+    server_address = '10.216.68.208'
     server_port = 10011
-    client_address = 'localhost'
+    client_address = '10.216.68.226'
     client_port = 11071
     # 要填内网ip,不能写localhost和127.0.0.1
     # address = '10.216.68.191'
